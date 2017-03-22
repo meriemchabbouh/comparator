@@ -12,6 +12,15 @@
                                 <div class="dropdown dropdown-access">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="access_link">{{Auth::user()-> email }}</a>
                                     <div class="dropdown-menu">
+                                    @if(Auth::user()->type==1)    
+                                       <p>
+                                        <a style="color:#e04f67" href="{{URL::route('get-editprovider')}}"> Editer profile</a>
+                                       </p>
+                                    @else
+                                       <p>
+                                        <a style="color:#e04f67" href="{{URL::route('get-editclient')}}"> Editer profile</a>
+                                       </p>
+                                    @endif   
                                      <input type="button" name="Sign_up" value="Log out" onClick='window.open("{{ URL::asset('/logout') }}", "_self")' class="button_drop outline">
                                     </div>
                                 </div><!-- End Dropdown access -->

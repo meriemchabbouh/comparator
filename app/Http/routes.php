@@ -83,6 +83,7 @@ Route::post('/register', array(
 ));
 
 Route::get('/login', array(
+    'middleware' => 'guest',
     'as' => 'get-login',
     'uses' => 'Auth\AuthController@getLogin'
 ));
@@ -104,4 +105,29 @@ Route::get('/about', function () {
 Route::get('/contact', function () {
     return view('pages.contact');
 });
+
+Route::get('/editprovider', array(
+    'middleware' => 'auth',
+    'as' => 'get-editprovider',
+    'uses' => 'EditProviderController@getEditprovider'
+));
+
+Route::post('/editprovider', array(
+    'middleware' => 'auth',   
+    'as' => 'post-editprovider',
+    'uses' => 'EditProviderController@postEditprovider'
+));
+
+Route::get('/editclient', array(
+    'as' => 'get-editclient',
+    'uses' => 'EditClientController@getEditclient'
+));
+
+
+Route::post('/editclient', array(
+    'as' => 'post-editclient',
+    'uses' => 'EditClientController@postEditclient'
+));
+
+
 

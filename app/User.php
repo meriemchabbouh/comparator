@@ -28,11 +28,11 @@ class User extends Authenticatable
 
      public function client()
     {
-        return $this->hasOne('app\Client');
+        return $this->hasOne('App\Client');
     }
 
     public function provider()
     {
-        return $this->hasOne('app\Provider');
+        return $this->hasOne('App\Provider');
     }
 }

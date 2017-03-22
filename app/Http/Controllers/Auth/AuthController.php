@@ -11,6 +11,9 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
+
 
 
 class AuthController extends Controller
@@ -42,7 +45,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware($this->guestMiddleware(), ['except' => 'getLogout']);
+
     }
 
     /**
@@ -124,24 +127,29 @@ class AuthController extends Controller
 
     public function postLogin(Request $request){
 
-        $email                = $request->input('email');
-        $password             = ($request->input('password'));
+        $email = $request->input('email');
+        $password = $request->input('password');
 
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
-            // Authentication passed...
-            return redirect('/');
+
+            $type= Auth::user()->type;
+            if($type==1){
+                return redirect()->route('get-editprovider');
+            }
+            else{
+                return redirect()->route('get-editclient');
+            }
         }
-         else {
+        else {
             return redirect()->back();
          }
 
     }
 
-        public function getLogout(){
+    public function getLogout(){
             Auth::logout();
             return redirect('/');
     }
-
 
 }
 

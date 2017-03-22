@@ -61,32 +61,41 @@
     <section id="hero" class="login">
     	<div class="container">
         	<div class="row">
-            	<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+            	<div class="col-md-6 col-md-offset-4 col-sm-6 col-sm-offset-3">
                 	<div id="login">
                     		<div class="text-center"><img src="{{ asset('img/logo_sticky.png') }}" alt="Image" data-retina="true" ></div>
                             <hr>
-                           <form action="{{URL::route('post-register')}}" method="post">
+                            <form  method="post" action="{{URL::route('post-editclient')}}">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
+                            <div class="row">
+                              <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
-                                	<label>Email</label>
-                                    <input type="email" name="email" class=" form-control" placeholder="Email">
+                                    <label>Nom</label>
+                                    <input type="text" class=" form-control" name="last_name" value="{{$client->last_name}}" placeholder="Nom">
                                 </div>
                                 <div class="form-group">
-                                	<label>Password</label>
-                                    <input type="password" name="password" class=" form-control" id="password1" placeholder="Password">
+                                	<label>Prenom</label>
+                                    <input type="text" name="first_name" class=" form-control" value="{{$client->first_name}}"  placeholder="prenom">
                                 </div>
-                                <div class="form-group">
-                                	<label>Confirm password</label>
-                                    <input type="password" name="confirm" class=" form-control" id="password2" placeholder="Confirm password">
-                                </div>
+                              </div>    
+                            </div>
 
-                                 <div class="form-group">
-                                    <input type="radio" name="type" value="1" checked > prestataire  
-                                    <input type="radio" name="type" value="2" >client
+                            <div class="row">
+                              <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label>Date de naissance</label>
+                                    <input type="date" class=" form-control" name="dob" value="{{$client->dob}}" placeholder="12/12/2012">
                                 </div>
-                                                                   
-                                <div id="pass-info" class="clearfix"></div>                                
-                                <button type="submit" class="btn_full">Create an account</button>
+                                <div class="form-group">
+                                    <label>sexe</label>
+                                    <input type="text" class=" form-control" name="public_email" placeholder="Email public">
+                                </div>
+                              </div>  
+                            </div>    
+                            
+                          
+                                <div id="pass-info" class="clearfix"></div>
+                                <button type="submit" class="btn_full">Sauvegarder</button>
 
                             </form>
                         </div>
