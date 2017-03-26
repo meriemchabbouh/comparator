@@ -13,6 +13,8 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
+use Mail;
+use Hash;
 
 
 
@@ -94,28 +96,35 @@ class AuthController extends Controller
                 $request, $validator
             );
         }*/
-
-        $activation_code            = str_random(60) . $request->input('email');
         $user                       = new User;
         
         $user->email                = $request->input('email');
         $user->password             = bcrypt($request->input('password'));
-        $user->confirm              = $request->input('confirm');
         $user->type                 = $request->input('type');
-        $user->activation_code      = $activation_code;
+        $user->active               = 0;
+        $user->activation_code      = str_random(60);
 
-       if ($user->save()) {
+        if ($user->save()) {
 
-        if($user->type == '1'){
-            $provider = new Provider;
-            $user->provider()->save($provider);
+            if($user->type == '1'){
+                $provider = new Provider;
+                $user->provider()->save($provider);
+            }
+            else{
+                $client = new Client;
+                $user->client()->save($client);
+            }
+
+            // envoie mail
+            Mail::send('emails.account_activation', ['activation_code' => $user->activation_code], function ($m) use ($user) {
+                $m->from('comparator.contact@gmail.com', 'Comparator');
+
+                $m->to($user->email, '')->subject('Account activation');
+            });
+
+         
         }
-        else{
-            $client = new Client;
-            $user->client()->save($client);
-        }
-     
-        }
+
 
 
     }
@@ -149,6 +158,71 @@ class AuthController extends Controller
     public function getLogout(){
             Auth::logout();
             return redirect('/');
+    }
+
+    public function getActivateAccount($activation_code){
+        $user = User::where('activation_code', '=' , $activation_code)->where('active', '=', 0)->first();
+
+        if(!empty($user)) {
+            $user->active = 1;
+            $user->activation_code = null;
+            $user->save();
+
+
+            Auth::login($user);
+
+            return redirect('/');
+        } else {
+            return 'Code d\'activation n est pas correct';
+        }
+
+    }
+
+
+    public function getResetPassword() {
+        return view('pages.reset-password');
+    }
+
+    public function postResetPassword(Request $request) {
+        $email = $request->get('email');
+
+        $user = User::where('email', '=', $email)->first();
+
+        if(empty($user)){
+            // oc1 utilisateur trouver avec ce mail
+            return redirect()->route('get-reset-password');
+        } else {
+            $user->reset_password_code = str_random(60); // token
+            $user->temp_password = str_random(7); // temp password
+            $user->save();
+            // send email with link & new code
+            // envoie mail
+            Mail::send('emails.reset-password', ['user' => $user], function ($m) use ($user) {
+                $m->from('comparator.contact@gmail.com', 'Comparator');
+
+                $m->to($user->email, '')->subject('Reset Password');
+            });
+            return redirect('/');
+        }
+
+    }
+
+    public function getResetPasswordToken($reset_password_token) {
+        $user = User::where('reset_password_code', $reset_password_token)->where('active',1)->first();
+
+        if(empty($user)){
+            return redirect('/');
+        }
+
+        $user->password= bcrypt($user->temp_password);
+        $user->reset_password_code = null;
+        $user->temp_password = null;
+
+        if($user->save()){
+            return redirect('/login');
+        } else {
+            return redirect('/');
+        }
     }
 
 }

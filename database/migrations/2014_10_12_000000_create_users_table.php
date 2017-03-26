@@ -16,11 +16,14 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('email');
             $table->string('password');
-            $table->string('facebbok_id');
-            $table->integer('type');
-            $table->string('confirm');
-            $table->string('activation_code');
-            $table->integer('active');
+            $table->string('facebook_id')->nullable();
+            $table->integer('type')->nullable();
+            //activate account
+            $table->string('activation_code')->nullable();
+            $table->integer('active')->default(0);
+            // reset password
+            $table->string('reset_password_code')->nullable();
+            $table->string('temp_password')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

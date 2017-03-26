@@ -14,10 +14,10 @@ class CreateClientsTable extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->date('dob');
-            $table->string('gender');
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->date('dob')->nullable();
+            $table->string('gender')->nullable();
             
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');

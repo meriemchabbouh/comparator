@@ -129,5 +129,33 @@ Route::post('/editclient', array(
     'uses' => 'EditClientController@postEditclient'
 ));
 
+Route::get('login/facebook','FacebookController@redirectToProvider');
+Route::get('facebooklogin/callback', 'FacebookController@handleProviderCallback');
 
 
+
+
+// activate account
+Route::get('activate-account/{activation_code}', array(
+    'as' => 'get-activate-account',
+    'uses' => 'Auth\AuthController@getActivateAccount'
+));
+
+
+// reset password
+Route::get('reset-password', array(
+    'as' => 'get-reset-password',
+    'uses' => 'Auth\AuthController@getResetPassword'
+));
+
+// reset password
+Route::post('reset-password', array(
+    'as' => 'post-reset-password',
+    'uses' => 'Auth\AuthController@postResetPassword'
+));
+
+
+Route::get('reset-password-token/{reset_password_token}', array(
+    'as' => 'get-reset-password-token',
+    'uses' => 'Auth\AuthController@getResetPasswordToken'
+));

@@ -14,15 +14,15 @@ class CreateProvidersTable extends Migration
     {
         Schema::create('providers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('address');
-            $table->text('description');
-            $table->string('postal_code');
-            $table->string('phone');
-            $table->string('public_email');
-            $table->string('link_fb');
-            $table->string('link_instagram');
-            $table->string('link_website');
+            $table->string('name')->nullable();
+            $table->string('address')->nullable();
+            $table->text('description')->nullable();
+            $table->string('postal_code')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('public_email')->nullable();
+            $table->string('link_fb')->nullable();
+            $table->string('link_instagram')->nullable();
+            $table->string('link_website')->nullable();
 
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
