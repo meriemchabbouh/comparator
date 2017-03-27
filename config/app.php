@@ -159,6 +159,7 @@ return [
 
 
         Laravel\Socialite\SocialiteServiceProvider::class,
+        Codecourse\Notify\NotifyServiceProvider::class,
 
     ],
 
@@ -206,6 +207,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Notify' => Codecourse\Notify\Facades\Notify::class,
     ],
 
 ];

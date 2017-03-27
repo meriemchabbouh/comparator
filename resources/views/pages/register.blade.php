@@ -67,9 +67,14 @@
                             <hr>
                            <form action="{{URL::route('post-register')}}" method="post">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                <div class="form-group">
+                                <div class="form-group {{ ($errors->has('email')) ? 'has-error has-feedback'  :''}}">
                                 	<label>Email</label>
-                                    <input type="email" name="email" class=" form-control" placeholder="Email">
+                                    <input type="text" name="email" class=" form-control" placeholder="Email" value="{{ old('email') }}">
+                                    @if($errors->has('email'))
+                                        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                                        <label id="email-error" class="error"
+                                               for="email-error">{{ $errors->first('email') }}</label>
+                                    @endif
                                 </div>
                                 <div class="form-group">
                                 	<label>Password</label>

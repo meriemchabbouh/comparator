@@ -88,14 +88,16 @@ class AuthController extends Controller
 
     public function postRegister(Request $request){
 
-    
-       /*$validator = $this->validator($request->all());
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|unique:users',
+        ]);
 
         if ($validator->fails()) {
-            $this->throwValidationException(
-                $request, $validator
-            );
-        }*/
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
         $user                       = new User;
         
         $user->email                = $request->input('email');
@@ -122,9 +124,21 @@ class AuthController extends Controller
                 $m->to($user->email, '')->subject('Account activation');
             });
 
+            notify()->flash('Compte crée', 'success', [
+                'text' => 'Verifiez votre email à fin d\'activer votre compte',
+            ]);
+
+            return redirect('/');
+
          
         }
 
+        notify()->flash('Erreur', 'error', [
+            'timer' => 5000,
+            'text' => 'Erreur pendant la creation de votre compte. SVP contactez un administrateur',
+        ]);
+
+        return redirect()->back();
 
 
     }
