@@ -150,6 +150,16 @@ class AuthController extends Controller
 
     public function postLogin(Request $request){
 
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email:users',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
         $email = $request->input('email');
         $password = $request->input('password');
 
@@ -164,6 +174,11 @@ class AuthController extends Controller
             }
         }
         else {
+
+            notify()->flash('Erreur', 'error', [
+            'text' => 'ce compte n\'existe pas',
+            ]);
+
             return redirect()->back();
          }
 
@@ -198,6 +213,18 @@ class AuthController extends Controller
     }
 
     public function postResetPassword(Request $request) {
+
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email:users',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+
         $email = $request->get('email');
 
         $user = User::where('email', '=', $email)->first();
@@ -216,7 +243,13 @@ class AuthController extends Controller
 
                 $m->to($user->email, '')->subject('Reset Password');
             });
+
+            notify()->flash('password oublier', 'success', [
+                'text' => 'Verifiez votre email pour trouver votre nouveau password',
+            ]);
+
             return redirect('/');
+
         }
 
     }

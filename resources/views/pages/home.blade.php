@@ -59,7 +59,8 @@
      <!-- Header================================================== -->
   @include('includes.header')
     
-<section id="search_container">
+<section id="search_container" >
+    
     <div id="search">
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#tours" data-toggle="tab">Voitures</a></li>
@@ -79,6 +80,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
+
                                     <div class="form-group">
                                         <label>Lieu de retour</label>
                                         <select class="ddslick" name="category">

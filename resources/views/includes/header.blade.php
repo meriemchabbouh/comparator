@@ -33,7 +33,7 @@
                                     <div class="dropdown-menu">
                                         <div class="row">
                                             <div class="col-md-6 col-sm-6 col-xs-6">
-                                                <a href="#" class="bt_facebook">
+                                                <a href="{{ asset('login/facebook') }}" class="bt_facebook">
                                                     <i class="icon-facebook"></i>Facebook </a>
                                             </div>
                                             <div class="col-md-6 col-sm-6 col-xs-6">
@@ -53,7 +53,7 @@
                                         <div class="form-group">
                                             <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password">
                                         </div>
-                                        <a id="forgot_pw" href="#">Forgot password?</a>
+                                        <a id="forgot_pw" href="{{ asset('/reset-password')}}">Forgot password?</a>
                                         <input type="submit" name="Sign_in" value="Sign in" id="Sign_in" class="button_drop">
                                         <input type="button" name="Sign_up" value="Sign up" id="Sign_up" onClick='window.open("{{ URL::asset('/register') }}")' class="button_drop outline">
                                     </form>

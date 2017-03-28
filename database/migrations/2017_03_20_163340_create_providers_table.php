@@ -25,7 +25,7 @@ class CreateProvidersTable extends Migration
             $table->string('link_website')->nullable();
 
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
           ////  $table->integer('governorate_id')->unsigned();
            // $table->foreign('governorate_id')->references('id')->on('governorates');
 

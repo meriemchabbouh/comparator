@@ -73,9 +73,14 @@
                             <div class="login-or"><hr class="hr-or"><span class="span-or">or</span></div>
                             <form method="post" action="{{URL::route('post-reset-password')}}">
                                 <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                <div class="form-group">
+                                <div class="form-group {{ ($errors->has('email')) ? 'has-error has-feedback'  :''}}">
                                     <label>Email</label>
-                                    <input type="text" class=" form-control " placeholder="Email" name="email" >
+                                    <input type="text" class=" form-control " placeholder="Email" name="email" value="{{ old('email') }}" >
+                                    @if($errors->has('email'))
+                                        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                                        <label id="email-error" class="error"
+                                               for="email-error">{{ $errors->first('email') }}</label>
+                                    @endif
                                 </div>
                                 <input  type="submit" class="btn_full" name="reset_password" value="Reset Password" >
                            </form>
