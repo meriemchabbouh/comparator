@@ -278,5 +278,6 @@
 
  <!-- Common scripts -->
 @include('layouts.scripts')
-  </body>
+
+</body>
 </html>

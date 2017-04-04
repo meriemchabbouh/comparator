@@ -7,11 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Governorate extends Model
 {
     protected $fillable = [
-         'name'
+        'name'
         ];
 
     public function providers()
     {
-        return $this->hasMany('app\Provider');
+        return $this->hasMany('App\Provider');
+    }
+
+    public function cities()
+    {
+    	return $this->hasMany('App\City');
     }
 }

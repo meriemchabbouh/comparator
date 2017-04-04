@@ -57,7 +57,6 @@
 
     <!-- Header================================================== -->
     @include('includes.header')
-        
     <!-- End Header -->
     
     <section id="hero" class="login">

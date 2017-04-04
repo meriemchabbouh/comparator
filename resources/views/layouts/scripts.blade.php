@@ -4,6 +4,7 @@
 <script src="{{ asset('js/common_scripts_min.js') }}"></script>
 <script src="{{ asset('js/functions.js') }}"></script>
 
+
 @if (notify()->ready())
     <script>
         swal({

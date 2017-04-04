@@ -16,6 +16,11 @@ Route::get('/', function () {
     return view('pages.home');
 });
 
+Route::get('/home1', function () {
+    return view('pages.home1');
+});
+
+
 Route::get('/login', function () {
     return view('pages.login');
 });
@@ -159,3 +164,17 @@ Route::get('reset-password-token/{reset_password_token}', array(
     'as' => 'get-reset-password-token',
     'uses' => 'Auth\AuthController@getResetPasswordToken'
 ));
+
+//factory(App\User::class, 3)->create();
+//factory(App\Governorate::class, 3)->create();
+//factory(App\City::class, 3)->create();
+//factory(App\Brand::class, 3)->create();
+//factory(App\CarModel::class, 3)->create();
+//factory(App\Type_car::class, 3)->create();
+factory(App\Car::class, 3)->create();
+
+
+
+/*Route::get('/getuser', array(
+       'as'=>'get_user',
+       'uses'=>'UserController@getUser'));*/
