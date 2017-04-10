@@ -165,16 +165,35 @@ Route::get('reset-password-token/{reset_password_token}', array(
     'uses' => 'Auth\AuthController@getResetPasswordToken'
 ));
 
-//factory(App\User::class, 3)->create();
+
+//factory(App\User::class, 5)->create();
+//factory(App\Provider::class, 5)->create();
 //factory(App\Governorate::class, 3)->create();
 //factory(App\City::class, 3)->create();
-//factory(App\Brand::class, 3)->create();
-//factory(App\CarModel::class, 3)->create();
+//factory(App\Brand::class, 5)->create(); // 1->5
+//factory(App\Car_model::class, 30)->create();
 //factory(App\Type_car::class, 3)->create();
-factory(App\Car::class, 3)->create();
+//factory(App\Car::class, 35)->create();
+//factory(App\Photo_car::class, 18)->create();
+//factory(App\Cover_car::class, 35)->create();
 
 
+Route::get('/getuser', array(
+       'as'=>'get-user',
+       'uses'=>'UserController@getUser'
+));
 
-/*Route::get('/getuser', array(
-       'as'=>'get_user',
-       'uses'=>'UserController@getUser'));*/
+Route::get('/getallcars', array(
+       'as'=>'get-all-cars',
+       'uses'=>'CarController@getAllCars'
+));
+
+Route::get('/getallcarsagence/{id_provider}', array(
+       'as'=>'get-all-cars',
+       'uses'=>'CarController@getAllCarsForSpecificAgence'
+));
+
+Route::get('/getimgcar/{car_id}', array(
+       'as'=>'get-images-specific-car',
+       'uses'=>'CarController@getImagesForSpecificCar'
+));

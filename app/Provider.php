@@ -15,4 +15,10 @@ class Provider extends Model
 	{
 		return $this->belongsTo('App\User', 'user_id');
 	}
+
+	public function cars()
+	{
+		return $this->hasMany('App\Car');
+	}
+
 }

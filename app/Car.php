@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Car extends Model
 {
     protected $fillable = [
-    	'air conditioner', 'number_of_seats','number_of_doors','number_of_passengers','consumption',
+    	'air_conditioner', 'number_of_seats','number_of_doors','number_of_passengers','consumption',
     	'gps','transmission','airbag','abs','year','exteriror_color','interior_color','fuel','engine'
-    	]
+    	];
 
 	public function model()
 	{
-		return $this->belongsTo('App\Model');
+		return $this->belongsTo('App\Car_model');
 	}
 
 	public function type_car()
@@ -24,5 +24,20 @@ class Car extends Model
 	public function city()
 	{
 		return $this->belongsTo('App\City');
+	}
+
+	public function photo_cars()
+	{
+		return $this->hasMany('App\Photo_car');
+	}
+    
+    public function cover_cars()
+	{
+		return $this->hasMany('App\Cover_car');
+	}
+
+	public function provider()
+	{
+		return $this->belongsTo('App\Provider');
 	}
 }

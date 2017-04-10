@@ -12,7 +12,7 @@ class City extends Model
 
 	public function governorate()
 	{
-		return $this->belongsTo('App\governorate');
+		return $this->belongsTo('App\Governorate');
 	}
 
 	public function cars()

@@ -14,7 +14,7 @@ class CreateCarsTable extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('air conditioner');
+            $table->boolean('air_conditioner');
             $table->integer('number_of_seats');
             $table->integer('number_of_doors');
             $table->integer('number_of_passengers');
@@ -28,6 +28,15 @@ class CreateCarsTable extends Migration
             $table->string('interior_color');
             $table->string('fuel');
             $table->string('engine');
+
+            $table->integer('car_model_id')->unsigned();
+            $table->foreign('car_model_id')->references('id')->on('car_models')->onDelete('cascade');
+            $table->integer('city_id')->unsigned();
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
+            $table->integer('type_car_id')->unsigned();
+            $table->foreign('type_car_id')->references('id')->on('type_cars')->onDelete('cascade');
+            $table->integer('provider_id')->unsigned();
+            $table->foreign('provider_id')->references('id')->on('providers')->onDelete('cascade');
             $table->timestamps();
         });
     }
