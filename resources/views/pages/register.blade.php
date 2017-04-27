@@ -89,7 +89,16 @@
                                     <input type="radio" name="type" value="1" checked > prestataire  
                                     <input type="radio" name="type" value="2" >client
                                 </div>
-                                                                   
+                                <div style="width:35%">
+                                    <label class="switch-light switch-ios pull-right">
+                                    <input type="checkbox" name="option_1" id="option_1" checked value="1">
+                                    <span>
+                                    <span>Prestataire</span>
+                                    <span>Client</span>
+                                    </span>
+                                    <a></a>
+                                    </label>
+                                </div>                                  
                                 <div id="pass-info" class="clearfix"></div>                                
                                 <button type="submit" class="btn_full">Create an account</button>
 

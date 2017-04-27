@@ -71,7 +71,7 @@
                     
                     <div class="tab-content">
                         <div class="tab-pane active" id="tours">
-                        <h3>Search Voitures in Tunis</h3>
+                        <h3>Search Voitures in Tunisie</h3>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -756,6 +756,6 @@ $('input').iCheck({
                 showSelectedHTML: true 
             });
         });
-        </script>
+    </script>
 </body>
 </html>

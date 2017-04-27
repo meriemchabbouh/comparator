@@ -13,7 +13,7 @@ class Car extends Model
 
 	public function model()
 	{
-		return $this->belongsTo('App\Car_model');
+		return $this->belongsTo('App\Car_model',  'car_model_id');
 	}
 
 	public function type_car()
@@ -28,7 +28,7 @@ class Car extends Model
 
 	public function photo_cars()
 	{
-		return $this->hasMany('App\Photo_car');
+		return $this->hasMany('App\photo_car','car_id');
 	}
     
     public function cover_cars()
@@ -39,5 +39,22 @@ class Car extends Model
 	public function provider()
 	{
 		return $this->belongsTo('App\Provider');
+	}
+
+
+	public function getDefaultImage() {
+		$photos = $this->photo_cars;
+		if($photos->count() > 0){
+			return $photos->first()->photo;
+		}
+		return 'http://www.mercedes-benz.co.uk/content/media_library/unitedkingdom/mpc_unitedkingdom/passenger_cars_ng/products/new_cars/model_navigation_imagery/a-Class-feb-12-2016.object-Single-MEDIA.tmp/A-Class-feb-12-2016.jpg';
+		
+	}
+
+	public function getName() {
+		$model = $this->model->model;
+		$brand = $this->model->brand->brand;
+		$name = $brand . ' ' .$model;
+		return $name;
 	}
 }

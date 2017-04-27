@@ -57,13 +57,15 @@ Route::get('/test', function () {
     return view('pages.test');
 });
 
-Route::get('/voitures', function () {
-    return view('pages.all_voitures_list');
-});
+Route::get('/voitures', array(
+    'as' => 'get-cars',
+    'uses' => 'CarController@getCars'
+));
 
-Route::get('/single_voiture', function () {
-    return view('pages.single_voiture');
-});
+Route::get('/voiture/{id}', array(
+    'as' => 'get-car',
+    'uses' => 'CarController@getCar'
+));
 
 Route::get('/cart_voiture', function () {
     return view('pages.cart_voiture');
@@ -177,7 +179,6 @@ Route::get('reset-password-token/{reset_password_token}', array(
 //factory(App\Photo_car::class, 18)->create();
 //factory(App\Cover_car::class, 35)->create();
 
-
 Route::get('/getuser', array(
        'as'=>'get-user',
        'uses'=>'UserController@getUser'
@@ -197,3 +198,56 @@ Route::get('/getimgcar/{car_id}', array(
        'as'=>'get-images-specific-car',
        'uses'=>'CarController@getImagesForSpecificCar'
 ));
+
+Route::get('/getcarscity/{city_id}', array(
+       'as'=>'get-cars-city',
+       'uses'=>'CarController@getCarsForSpecificCity'
+));
+
+Route::get('/getcarsgovernorate/{governorate_id}', array(
+       'as'=>'get-cars-governorate',
+       'uses'=>'CarController@getCarsForSpecificGovernorate'
+));
+
+Route::get('/getcarstype/{type_id}', array(
+       'as'=>'get-cars-type',
+       'uses'=>'CarController@getCarsByType'
+));
+
+Route::post('/carandimg', array(
+       'as'=>'post-car-and-img',
+       'uses'=>'CarController@addCarAndImages'
+));
+
+Route::get('/addcar', array(
+       'as'=>'get-add-car',
+       'uses'=>'CarController@getAddcar'
+));
+Route::get('/editcar/{id}', array(
+       'as'=>'get-edit-car',
+       'uses'=>'CarController@getEditcar'
+));
+
+Route::post('/editcar', array(
+       'as'=>'edit-car',
+       'uses'=>'CarController@editCar'
+));
+
+
+Route::get('/deletecar/{car_id}', array(
+       'as'=>'get-delete-car',
+       'uses'=>'CarController@deleteCarAndImages'
+));
+
+
+// Upload file
+Route::get('/upload', [
+  'uses' => 'UploadController@getUpload',
+  'as' => 'upload'
+]);
+
+// Upload file
+Route::post('/upload', [
+  'uses' => 'UploadController@postUpload',
+  'as' => 'upload'
+]);
