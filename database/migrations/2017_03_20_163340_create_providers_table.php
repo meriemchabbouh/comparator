@@ -23,6 +23,7 @@ class CreateProvidersTable extends Migration
             $table->string('link_fb')->nullable();
             $table->string('link_instagram')->nullable();
             $table->string('link_website')->nullable();
+            $table->integer('type')->default(0);
 
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

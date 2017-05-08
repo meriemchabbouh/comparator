@@ -57,12 +57,12 @@ Route::get('/test', function () {
     return view('pages.test');
 });
 
-Route::get('/voitures', array(
+Route::get('/cars', array(
     'as' => 'get-cars',
     'uses' => 'CarController@getCars'
 ));
 
-Route::get('/voiture/{id}', array(
+Route::get('/car/{id}', array(
     'as' => 'get-car',
     'uses' => 'CarController@getCar'
 ));
@@ -189,9 +189,9 @@ Route::get('/getallcars', array(
        'uses'=>'CarController@getAllCars'
 ));
 
-Route::get('/getallcarsagence/{id_provider}', array(
-       'as'=>'get-all-cars',
-       'uses'=>'CarController@getAllCarsForSpecificAgence'
+Route::get('/carsprovider/{id_provider}', array(
+       'as'=>'get-cars-provider',
+       'uses'=>'CarController@getCarsProvider'
 ));
 
 Route::get('/getimgcar/{car_id}', array(
@@ -214,25 +214,25 @@ Route::get('/getcarstype/{type_id}', array(
        'uses'=>'CarController@getCarsByType'
 ));
 
-Route::post('/carandimg', array(
-       'as'=>'post-car-and-img',
-       'uses'=>'CarController@addCarAndImages'
-));
-
 Route::get('/addcar', array(
        'as'=>'get-add-car',
        'uses'=>'CarController@getAddcar'
 ));
-Route::get('/editcar/{id}', array(
+
+Route::post('/addcar', array(
+       'as'=>'post-car',
+       'uses'=>'CarController@addCarAndImages'
+));
+
+Route::get('/editcar/{car_id}', array(
        'as'=>'get-edit-car',
-       'uses'=>'CarController@getEditcar'
+       'uses'=>'CarController@getEditCar'
 ));
 
 Route::post('/editcar', array(
-       'as'=>'edit-car',
-       'uses'=>'CarController@editCar'
+       'as'=>'post-edit-car',
+       'uses'=>'CarController@postEditCar'
 ));
-
 
 Route::get('/deletecar/{car_id}', array(
        'as'=>'get-delete-car',

@@ -255,7 +255,7 @@
                     <div class="col-lg-2 col-md-2 col-sm-2">
                         <div class="price_list">
                             <div><sup>$</sup>39*<span class="normal_price_list">$99</span><small >*Per person</small>
-                                <p><a href="{{URL::asset('/single_voiture')}}" class="btn_1">Details</a></p>
+                                <p><a href="{{ route('get-car', $car->id) }}" class="btn_1">Details</a></p>
                             </div>
                         </div>
                     </div>

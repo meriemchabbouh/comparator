@@ -13,22 +13,24 @@ class CreateCarsTable extends Migration
     public function up()
     {
         Schema::create('cars', function (Blueprint $table) {
+            // to do nullable w -> default()
             $table->increments('id');
-            $table->boolean('air_conditioner');
-            $table->integer('number_of_seats');
-            $table->integer('number_of_doors');
-            $table->integer('number_of_passengers');
-            $table->string('consumption');
-            $table->boolean('gps');
-            $table->string('transmission');
-            $table->boolean('airbag');
-            $table->boolean('abs');
-            $table->date('year');
-            $table->string('exteriror_color');
-            $table->string('interior_color');
-            $table->string('fuel');
-            $table->string('engine');
-
+            $table->boolean('air_conditioner')->default(false);;
+            $table->integer('number_of_seats')->nullable();
+            $table->integer('number_of_doors')->nullable();
+            $table->integer('number_of_passengers')->nullable();
+            $table->string('consumption')->nullable();
+            $table->boolean('gps')->default(false);;
+            $table->string('transmission')->nullable();
+            $table->boolean('airbag')->default(false);
+            $table->boolean('abs')->default(false);;
+            $table->date('year')->nullable();
+            $table->string('exteriror_color')->nullable();
+            $table->string('interior_color')->nullable();
+            $table->string('fuel')->nullable();
+            $table->string('engine')->nullable();
+            $table->integer('price')->nullable();
+    
             $table->integer('car_model_id')->unsigned();
             $table->foreign('car_model_id')->references('id')->on('car_models')->onDelete('cascade');
             $table->integer('city_id')->unsigned();
